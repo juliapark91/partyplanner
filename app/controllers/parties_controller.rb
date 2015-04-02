@@ -10,6 +10,7 @@ class PartiesController < ApplicationController
   # GET /parties/1
   # GET /parties/1.json
   def show
+    @guests = @party.guests
   end
 
   # GET /parties/new
@@ -26,28 +27,23 @@ class PartiesController < ApplicationController
   def create
     @party = Party.new(party_params)
 
-    respond_to do |format|
-      if @party.save
-        format.html { redirect_to @party, notice: 'Party was successfully created.' }
-        format.json { render :show, status: :created, location: @party }
-      else
-        format.html { render :new }
-        format.json { render json: @party.errors, status: :unprocessable_entity }
-      end
+    if @party.save
+      redirect_to @party, notice: 'Party was successfully created.'
+      
+    else
+      flash[:error] = "Error creating party. Please try again."
+      render :new
     end
   end
 
   # PATCH/PUT /parties/1
   # PATCH/PUT /parties/1.json
   def update
-    respond_to do |format|
-      if @party.update(party_params)
-        format.html { redirect_to @party, notice: 'Party was successfully updated.' }
-        format.json { render :show, status: :ok, location: @party }
-      else
-        format.html { render :edit }
-        format.json { render json: @party.errors, status: :unprocessable_entity }
-      end
+    if @party.update(party_params)
+      redirect_to @party, notice: 'Party was successfully updated.'
+    else
+      flash[:error] = "Error editing party. Please try again."
+      render :edit
     end
   end
 
@@ -69,6 +65,6 @@ class PartiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def party_params
-      params.require(:party).permit(:title, :started_at, :ended_at, :city, :state, :zip_code, :phone, :email, :url)
+      params.require(:party).permit(:title, :started_at, :ended_at, :city, :state, :zip_code, :phone, :email)
     end
 end

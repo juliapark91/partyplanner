@@ -20,5 +20,16 @@
   <%= @guest.email %>
 </p>
 
+<p>
+  <strong>Attending parties:</strong>
+</p>
+
+<% Party.all.each do |party| %>
+  <%= link_to "#{party.title}", party_path(party) %>
+  <br>
+<% end %>
+
+<br>
+
 <%= link_to 'Edit', edit_guest_path(@guest) %> |
 <%= link_to 'Back', guests_path %>

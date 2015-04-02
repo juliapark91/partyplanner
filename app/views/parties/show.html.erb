@@ -4,6 +4,11 @@
   <strong>Title:</strong>
   <%= @party.title %>
 </p>
+  <% @guests.each do |guest| %>
+        <h4 class="media-heading">
+          <%= link_to guest.party, [@party, guest] %>
+        </h4>
+    <% end %>
 
 <p>
   <strong>Started at:</strong>
@@ -38,11 +43,6 @@
 <p>
   <strong>Email:</strong>
   <%= @party.email %>
-</p>
-
-<p>
-  <strong>Url:</strong>
-  <%= @party.url %>
 </p>
 
 <%= link_to 'Edit', edit_party_path(@party) %> |

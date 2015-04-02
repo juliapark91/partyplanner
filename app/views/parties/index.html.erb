@@ -13,7 +13,6 @@
       <th>Zip code</th>
       <th>Phone</th>
       <th>Email</th>
-      <th>Url</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -21,7 +20,7 @@
   <tbody>
     <% @parties.each do |party| %>
       <tr>
-        <td><%= party.title %></td>
+        <td><%= link_to "#{party.title}", party %></td>
         <td><%= party.started_at %></td>
         <td><%= party.ended_at %></td>
         <td><%= party.city %></td>
@@ -29,8 +28,7 @@
         <td><%= party.zip_code %></td>
         <td><%= party.phone %></td>
         <td><%= party.email %></td>
-        <td><%= party.url %></td>
-        <td><%= link_to 'Show', party %></td>
+        <td><%= link_to "#{party.guests.count} Guests", party_guests_path(party) %></td>
         <td><%= link_to 'Edit', edit_party_path(party) %></td>
         <td><%= link_to 'Destroy', party, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
