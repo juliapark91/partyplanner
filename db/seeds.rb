@@ -1,7 +1,7 @@
 require 'faker'
  
 # Create Guests
-10.times do
+100.times do
    guest = Guest.create!(
      first_name: Faker::Name.first_name,
      last_name: Faker::Name.last_name, 
@@ -9,11 +9,11 @@ require 'faker'
      email: Faker::Internet.email,     
    )
  end
- guests = Guest.all
 
+guests = Guest.all
 
 # Create Party
-5.times do
+20.times do
   party = Party.create!(
     title:  Faker::Lorem.sentence,
     started_at: Faker::Time.backward(14, :evening),
@@ -26,8 +26,15 @@ require 'faker'
     phone: Faker::PhoneNumber.cell_phone
   )
 end
+
 parties = Party.all
 
+guest_ids = Guest.pluck(:id)
+guest_id = guest_ids.select(:id)
+
+parties.each do |party|
+  party.guest_id = guest_id.shuffle[0...4]
+end
 
 puts "Seed finished"
 puts "#{Guest.count} guests created"

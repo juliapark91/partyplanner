@@ -1,37 +1,36 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title:</strong>
+  <strong>Title</strong>
   <%= @party.title %>
 </p>
-  <% @guests.each do |guest| %>
-        <h4 class="media-heading">
-          <%= link_to guest.party, [@party, guest] %>
-        </h4>
-    <% end %>
 
 <p>
-  <strong>Started at:</strong>
+  <strong>Start Time</strong>
   <%= @party.started_at %>
 </p>
 
 <p>
-  <strong>Ended at:</strong>
+  <strong>End Time</strong>
   <%= @party.ended_at %>
 </p>
 
 <p>
-  <strong>City:</strong>
+  <strong>Address</strong>
+</p>
+
+<p>
+  <strong>City</strong>
   <%= @party.city %>
 </p>
 
 <p>
-  <strong>State:</strong>
+  <strong>State</strong>
   <%= @party.state %>
 </p>
 
 <p>
-  <strong>Zip code:</strong>
+  <strong>Zip code</strong>
   <%= @party.zip_code %>
 </p>
 
@@ -45,5 +44,17 @@
   <%= @party.email %>
 </p>
 
+<p>Registered Guests</p>
+
+<p>
+  <% @guests.each do | guest | %>
+    <%= link_to guest.full_name, guest_path(guest) %>
+  <% end %>
+</p>
+
+<p>
+  <strong> Add New Guest </strong>
+</p>
+<%= render 'guests/form' %>
 <%= link_to 'Edit', edit_party_path(@party) %> |
 <%= link_to 'Back', parties_path %>

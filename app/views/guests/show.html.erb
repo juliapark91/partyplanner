@@ -20,14 +20,16 @@
   <%= @guest.email %>
 </p>
 
-<p>
-  <strong>Attending parties:</strong>
-</p>
 
-<% Party.all.each do |party| %>
+<p>Parties Attending</p>
+
+<% @parties.each do |party| %>
   <%= link_to "#{party.title}", party_path(party) %>
-  <br>
 <% end %>
+
+<%# Party.all.each do |party| %>
+  <%#= link_to "#{party.title}", party_path(party) %>
+<%# end %>
 
 <br>
 
